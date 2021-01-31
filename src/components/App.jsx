@@ -5,15 +5,6 @@ import Note from "./Note"
 import CreateArea from"./CreateArea";
 
 
-// function createNotes(note){
-//     return <Note 
-//         key={note.key}
-//         title={note.title}
-//         content={note.content}
-//     />
-// }
-
-
 function App(){
 
     //create a list to hold the input item 
@@ -25,6 +16,14 @@ function App(){
         }))
     }
 
+    function deleteNote(id){
+        setInputItem((preNote)=>{
+            return preNote.filter((item, index)=>{
+                return index !==id
+            })
+        })
+    }
+
     return(
         <div>
             <Header />
@@ -32,8 +31,10 @@ function App(){
             {inputItem.map((noteItem,index)=>{
                 return <Note 
                     key={index}
+                    id={index}
                     title={noteItem.title}
                     content={noteItem.content}
+                    onDelete={deleteNote}
                 />
             })}
            

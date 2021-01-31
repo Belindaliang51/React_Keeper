@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import PlusOneIcon from '@material-ui/icons/PlusOne';
 
 
 function CreateArea(props){
@@ -6,6 +7,8 @@ function CreateArea(props){
         title:"",
         content:""
         })
+
+    const [isExpanded, setExpanded] = useState(false);
 
         function handleChange(event){
             const {name,value} = event.target;
@@ -27,12 +30,19 @@ function CreateArea(props){
            })
         }
 
+        function expand(){
+            //console.log("expand")
+            setExpanded(true);
+        }
+
     return(
         <div>
             <form>
-                <input onChange={handleChange} value={note.title} name="title" placeholder="Title" />
-                <textarea onChange={handleChange} value={note.content} name="content" placeholder="Take a note..." rows="3" />
-                <button onClick={handleClick}>Add</button>
+                {isExpanded && <input onChange={handleChange} value={note.title} name="title" placeholder="Title" />}
+                <textarea onClick={expand} onChange={handleChange} value={note.content} name="content" placeholder="Take a note..." rows={isExpanded?"3":"1"} />
+                <button onClick={handleClick}>
+                    <PlusOneIcon />
+                </button>
             </form>
         </div>
 
